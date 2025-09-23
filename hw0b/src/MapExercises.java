@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,12 @@ public class MapExercises {
      */
     public static Map<Character, Integer> letterToNum() {
         // TODO: Fill in this function.
-        return null;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 1; i <= 26; i++) {
+            int ascii = i + 96;
+            map.put((char)ascii, i);
+        }
+        return map;
     }
 
     /** Returns a map from the integers in the list to their squares. For example, if the input list
