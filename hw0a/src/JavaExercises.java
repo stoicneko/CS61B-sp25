@@ -13,6 +13,12 @@ public class JavaExercises {
      */
     public static void starTriangle() {
         // TODO: Fill in this function
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -21,15 +27,30 @@ public class JavaExercises {
      */
     public static void printIndexed(String s) {
         // TODO: Fill in this function
-    }
+        for (int i = 0; i < s.length(); i++) {
+            char letter = s.charAt(i);
+            System.out.print(letter);
+            System.out.print(s.length() - i);
+            }
+        System.out.println();
+        }
+
+
 
     /**
      * Returns a new string where each character of the given string is repeated twice.
      * Example: stutter("hello") -> "hheelllloo"
      */
+    // 注意返回值
     public static String stutter(String s) {
         // TODO: Fill in this function
-        return null;
+        String twiceString = ""; // 定义空字符串
+        for (int i = 0; i < s.length(); i++) {
+            char letter = s.charAt(i);
+            twiceString += letter;
+            twiceString += letter;
+        }
+        return twiceString;
     }
 
     /**
@@ -43,6 +64,10 @@ public class JavaExercises {
      */
     public static int quadrant(int x, int y) {
         // TODO: Fill in this function
+        if (x > 0 && y > 0) return 1;
+        if (x < 0 && y > 0) return 2;
+        if (x < 0 && y < 0) return 3;
+        if (x > 0 && y < 0) return 4;
         return 0;
     }
 
