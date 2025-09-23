@@ -5,8 +5,7 @@ public class JavaExercises {
 
     /** Returns an array [1, 2, 3, 4, 5, 6] */
     public static int[] makeDice() {
-        // TODO: Fill in this function.
-        int [] array = {1, 2, 3, 4, 5, 6};
+        int[] array = {1, 2, 3, 4, 5, 6};
         return array;
     }
 
@@ -15,34 +14,30 @@ public class JavaExercises {
      *  If the customer is Erik, return ["sushi", "pasta", "avocado", "coffee"].
      *  In any other case, return an empty String[] of size 3. */
     public static String[] takeOrder(String customer) {
-        // TODO: Fill in this function.
-        if (customer == "Ergun") {
-            String[] Ergun = {"beyti", "pizza", "hamburger", "tea"};
-            return Ergun;
+        if (customer.equals("Ergun")) {
+            String[] ergun = {"beyti", "pizza", "hamburger", "tea"};
+            return ergun; // 注意这里idea提供的修改建议
         }
-        if (customer == "Erik") {
-            String[] Erik = {"sushi", "pasta", "avocado", "coffee"};
-            return Erik;
+        if (customer.equals("Erik")) {
+            return new String[]{"sushi", "pasta", "avocado", "coffee"};
         }
-        String[] nulledArray = new String[3];
-        return nulledArray;
+        return new String[3];
     }
 
-     /** Returns the positive difference between the maximum element and minimum element of the given array.
+    /* Returns the positive difference between the maximum element and minimum element of the given array.
      *  Assumes array is nonempty. */
     public static int findMinMax(int[] array) {
-        // TODO: Fill in this function.
-        int Min = array[0];
-        int Max = array[0];
+        int min = array[0];
+        int max = array[0];
         for (int i = 0; i < array.length; i++) {
-            if (array[i] > Max) {
-                Max = array[i];
+            if (array[i] > max) {
+                max = array[i];
             }
-            if (array[i] < Min) {
-                Min = array[i];
+            if (array[i] < min) {
+                min = array[i];
             }
         }
-        int output = Math.abs(Max - Min);
+        int output = Math.abs(max - min);
         return output;
     }
 
@@ -59,19 +54,6 @@ public class JavaExercises {
     }
 
     private static List<Integer> hailstoneHelper(int x, List<Integer> list) {
-        // TODO: Fill in this function.
-        // 使用循环
-//        while (x != 1) {
-//            list.add(x);
-//            if (x % 2 == 0) {
-//                x /= 2;
-//            } else {
-//                x = x * 3 + 1;
-//            }
-//        }
-//        list.add(1);
-//        return list;
-
         // 递归
         list.add(x);
         if (x == 1) {

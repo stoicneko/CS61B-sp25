@@ -1,7 +1,7 @@
 public class Dessert {
-    public static int numDesserts = 0;
-    public int flavor;
-    public int price;
+    static int numDesserts = 0;
+    int flavor;
+    int price;
     public Dessert(int f, int p) {
         flavor = f;
         price = p;
@@ -11,7 +11,7 @@ public class Dessert {
     public void printDessert() {
         System.out.print(flavor + " " + price + " " + numDesserts);
         System.out.println();
-//        numDesserts++;
+        //numDesserts++;
     }
     public static void main(String[] args) {
         System.out.println("I love dessert!");
