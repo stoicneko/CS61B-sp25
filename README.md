@@ -21,7 +21,7 @@
 
 - HW 0 - Java, Python, Introduction
   - [x] HW 0a - [Solution](hw0a) - [Website](https://sp25.datastructur.es/homeworks/hw0/hw0a/)
-  - [ ] HW 0b - [Solution](hw0b) - [Website](https://sp25.datastructur.es/homeworks/hw0/hw0b/)
+  - [x] HW 0b - [Solution](hw0b) - [Website](https://sp25.datastructur.es/homeworks/hw0/hw0b/)
 - [ ] HW 2 - Percolation - [Solution](hw2) - [Website](https://sp25.datastructur.es/homeworks/hw2/)
 
 ### Project
