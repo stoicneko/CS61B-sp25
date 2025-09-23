@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.In;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +23,26 @@ public class MapExercises {
      */
     public static Map<Integer, Integer> squares(List<Integer> nums) {
         // TODO: Fill in this function.
-        return null;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.size(); i++) {
+            map.put(nums.get(i), nums.get(i) * nums.get(i));
+        }
+        return map;
     }
 
     /** Returns a map of the counts of all words that appear in a list of words. */
     public static Map<String, Integer> countWords(List<String> words) {
         // TODO: Fill in this function.
-        return null;
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < words.size(); i++) {
+            int count = 0;
+            for (String elem : words) {
+                if (words.get(i) == elem) {
+                    count++;
+                }
+            }
+            map.put(words.get(i), count);
+        }
+        return map;
     }
 }
