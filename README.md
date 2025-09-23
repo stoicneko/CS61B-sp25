@@ -1,6 +1,6 @@
 # CS61B: Data Structures and Algorithms
 
-[![wakatime](https://wakatime.com/badge/github/stoicneko/CS61B-sp25.svg)](https://wakatime.com/badge/github/stoicneko/CS61B-sp25)
+[![wakatime](https://wakatime.com/badge/user/6655f5db-eb60-4cbb-91d5-e3fb83d7eebd/project/195f1089-2275-4687-aa7a-aa54d5047cbb.svg)](https://wakatime.com/badge/user/6655f5db-eb60-4cbb-91d5-e3fb83d7eebd/project/195f1089-2275-4687-aa7a-aa54d5047cbb)
 
 ## Contents
 
