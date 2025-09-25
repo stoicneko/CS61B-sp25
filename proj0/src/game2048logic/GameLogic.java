@@ -12,7 +12,7 @@ public class GameLogic {
      *
      * @param board the current state of the board
      * @param r     the row number of the tile to move up
-     * @param c -   the column number of the tile to move up
+     * @param c     the column number of the tile to move up
      * @param minR  the minimum row number that the tile can land in, e.g.
      *              if minR is 2, the moving tile should move no higher than row 2.
      * @return      if there is a merge, returns the 1 + the row number where the merge occurred.
@@ -27,17 +27,17 @@ public class GameLogic {
             if (r == minR) {
                 return 0;
             }
-            if (board[r-1][c] != 0) {
+            if (board[r - 1][c] != 0) {
                 // merge
-                if (board[r-1][c] == board[r][c]) {
-                    board[r-1][c] = board[r][c] + board[r][c]; // 是+不是*
+                if (board[r - 1][c] == board[r][c]) {
+                    board[r - 1][c] = board[r][c] + board[r][c]; // 是+不是*
                     board[r][c] = 0;
                     return r;
                 }
                 return 0;
             }
             // 要记得传递值
-            board[r-1][c] = board[r][c];
+            board[r - 1][c] = board[r][c];
             board[r][c] = 0;
             r--;
         }
