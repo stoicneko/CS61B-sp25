@@ -20,9 +20,9 @@ public class GameLogic {
      */
     public static int moveTileUpAsFarAsPossible(int[][] board, int r, int c, int minR) {
         while (r > 0) {
-//            if (board[r][c] == 0) {
-//                return 0;
-//            }
+            // if (board[r][c] == 0) {
+            //     return 0;
+            // }
             // minR
             if (r == minR) {
                 return 0;

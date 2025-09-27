@@ -61,11 +61,10 @@ public class JavaExercises {
         }
         if (x % 2 == 0) {
             x /= 2;
-            return hailstoneHelper(x, list);
         } else {
             x = x * 3 + 1;
-            return hailstoneHelper(x, list);
         }
+        return hailstoneHelper(x, list);
 
     }
 }
