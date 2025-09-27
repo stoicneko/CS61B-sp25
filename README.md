@@ -8,7 +8,7 @@
 
 - [x] Lab 1 - Setup - [Solution](lab/lab01) - [Website](https://sp25.datastructur.es/labs/lab01/) - [library-sp25](https://github.com/Berkeley-CS61B/library-sp25/)
 - [x] Lab 2 - Debugging (Part 1) - [Solution](lab02) - [Website](https://sp25.datastructur.es/labs/lab02/)
-- [ ] Lab 3 - Debugging (Part 2) - [Solution](lab03/) - [Website](https://sp25.datastructur.es/labs/lab03/)
+- [x] Lab 3 - Debugging (Part 2) - [Solution](lab03/) - [Website](https://sp25.datastructur.es/labs/lab03/)
 - [ ] Lab 4 - Git - [Solution](lab04/) - [Website](https://sp25.datastructur.es/labs/lab04/)
 - [ ] Lab 5 - Disjoint Sets - [Solution](lab05/) - [Website](https://sp25.datastructur.es/labs/lab05/)
 - [ ] Lab 6 - BSTMap - [Solution](lab06/) - [Website](https://sp25.datastructur.es/labs/lab06/)

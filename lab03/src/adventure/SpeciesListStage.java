@@ -93,6 +93,13 @@ public class SpeciesListStage implements AdventureStage {
      * Similarity is defined as when listTwo contains all the elements in listOne.
      */
     public static int arraySimilarity(List<String> listOne, List<String> listTwo) {
+        if (listOne.isEmpty()) {
+            if (listTwo.isEmpty()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
         List<String> copy = new ArrayList<>(listOne);
         int similarObjects = 0;
         for (String o : listTwo) {
