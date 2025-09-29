@@ -186,6 +186,7 @@ public class LinkedListDeque61BTest {
         assertThat(lld1.toList()).containsExactly(0).inOrder();
 
         lld1.removeFirst();    // []
-        assertThat(lld1.size()).isEqualTo(0);
+        assertThat(lld1.removeFirst()).isNull();    // []
+
         }
 }
