@@ -57,4 +57,76 @@ public class LinkedListDeque61BTest {
      }
 
     // Below, you'll write your own tests for LinkedListDeque61B.
+    @Test
+    public void isEmptyAndSizeTest() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+
+        assertThat(lld1.isEmpty()).isTrue();
+        lld1.addLast(0);   // [0]
+        assertThat(lld1.isEmpty()).isFalse();
+        assertThat(lld1.size()).isEqualTo(1);
+
+        lld1.addLast(1);   // [0, 1]
+        assertThat(lld1.isEmpty()).isFalse();
+        assertThat(lld1.size()).isEqualTo(2);
+
+    }
+
+    @Test
+    public void getTest() {
+        Deque61B<String> lld1 = new LinkedListDeque61B<>();
+        // empty Deque
+
+        assertThat(lld1.get(0)).isNull();
+        assertThat(lld1.get(1)).isNull();
+        assertThat(lld1.get(-1)).isNull();
+
+        lld1.addFirst("back"); // after this call we expect: ["back"]
+        assertThat(lld1.get(0)).isEqualTo("back");
+
+        lld1.addFirst("middle");
+        assertThat(lld1.get(0)).isEqualTo("middle");
+        assertThat(lld1.get(1)).isEqualTo("back");
+
+        lld1.addFirst("front");
+        assertThat(lld1.get(0)).isEqualTo("front");
+        assertThat(lld1.get(1)).isEqualTo("middle");
+        assertThat(lld1.get(2)).isEqualTo("back");
+
+        // i < -1
+        assertThat(lld1.get(-1)).isNull();
+
+        // i out of bound
+        assertThat(lld1.get(3)).isNull();
+        assertThat(lld1.get(13134)).isNull();
+    }
+
+    @Test
+    public void getRecursiveTest() {
+        Deque61B<String> lld1 = new LinkedListDeque61B<>();
+        // empty Deque
+
+        assertThat(lld1.get(0)).isNull();
+        assertThat(lld1.get(1)).isNull();
+        assertThat(lld1.get(-1)).isNull();
+
+        lld1.addFirst("back"); // after this call we expect: ["back"]
+        assertThat(lld1.get(0)).isEqualTo("back");
+
+        lld1.addFirst("middle");
+        assertThat(lld1.get(0)).isEqualTo("middle");
+        assertThat(lld1.get(1)).isEqualTo("back");
+
+        lld1.addFirst("front");
+        assertThat(lld1.get(0)).isEqualTo("front");
+        assertThat(lld1.get(1)).isEqualTo("middle");
+        assertThat(lld1.get(2)).isEqualTo("back");
+
+        // i < -1
+        assertThat(lld1.get(-1)).isNull();
+
+        // i out of bound
+        assertThat(lld1.get(3)).isNull();
+        assertThat(lld1.get(13134)).isNull();
+    }
 }

@@ -38,8 +38,13 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         Node<T> p = sentinel.next;
         // first
         sentinel.next = new Node<>(x, p, sentinel);
+        // second
+        p.prev = sentinel.next;
         // last
-        sentinel.prev = p.next;
+//        sentinel.prev = p.prev; // 这样写 sentinel.prev/last 只有在一直使用addFirst时会正常更新
+                                // 要找一个固定值, 固定的最后一个
+                                // 但不是1 = 1
+
     }
 
     /**
@@ -51,7 +56,10 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     public void addLast(T x) {
         size += 1;
         Node<T> p = sentinel.prev;
-        sentinel.prev = new Node<>(x, sentinel, sentinel.prev);
+        // last
+        sentinel.prev = new Node<>(x, sentinel, p);
+       // second to last
+
         p.next = sentinel.prev;
 
     }
@@ -66,6 +74,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         List<T> returnList = new ArrayList<>();
         Node<T> p = sentinel.next;
         while (p.next != sentinel.next) {
+            // 这里其实只是正向检测
             returnList.add(p.item);
             p = p.next;
         }
@@ -123,7 +132,16 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T get(int index) {
-        return null;
+        if (index >= size() || size() == 0 || index < 0) {
+            return null;
+        }
+        Node<T> p = sentinel.next; // 第0个item
+        int i = 0;
+        while (i < index) {
+            i++;
+            p = p.next;
+        }
+        return p.item;
     }
 
     /**
@@ -136,6 +154,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T getRecursive(int index) {
-        return null;
+        Node<T> p = sentinel.next; // 第0个item
+        if (p = p.next)
     }
 }
