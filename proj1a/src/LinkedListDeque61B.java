@@ -3,25 +3,26 @@ import java.util.List;
 
 public class LinkedListDeque61B<T> implements Deque61B<T> {
 
-    public static class Node<T> {
-        public T item;
-        public Node<T> prev;
-        public Node<T> next;
+//    public static class Node {
+    // 要使用Deque的T 声明 item 这里不能有static, static 属于切断链接
+    public class Node {
+        T item;
+        Node prev;
+        Node next;
 
-        private Node(T i, Node<T> n, Node<T> p) {
+        private Node(T i, Node n, Node p) {
             item = i;
             next = n;
             prev = p;
         }
     }
 
-    public Node<T> sentinel = new Node<>(null, null, null);
-//    public Node<T> first;
-//    public Node<T> last;
-    public int size = 0;
+    Node sentinel = new Node(null, null, null);
+    //    public Node first;
+    //    public Node last;
+    int size = 0;
 
 
-    // TODO: Implement the constructor
     public LinkedListDeque61B() {
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
@@ -35,15 +36,16 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public void addFirst(T x) {
         size += 1;
-        Node<T> p = sentinel.next;
+        // Node p = sentinel.next;
         // first
-        sentinel.next = new Node<>(x, p, sentinel);
+        sentinel.next = new Node(x, sentinel.next, sentinel);
         // second
-        p.prev = sentinel.next;
+        sentinel.next.next.prev = sentinel.next;
+        // p.prev = sentinel.next;
         // last
-//        sentinel.prev = p.prev; // 这样写 sentinel.prev/last 只有在一直使用addFirst时会正常更新
-                                // 要找一个固定值, 固定的最后一个
-                                // 但不是1 = 1
+        // sentinel.prev = p.prev; // 这样写 sentinel.prev/last 只有在一直使用addFirst时会正常更新
+        // 要找一个固定值, 固定的最后一个
+        // 但不是1 = 1
 
     }
 
@@ -55,12 +57,10 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public void addLast(T x) {
         size += 1;
-        Node<T> p = sentinel.prev;
         // last
-        sentinel.prev = new Node<>(x, sentinel, p);
-       // second to last
-
-        p.next = sentinel.prev;
+        sentinel.prev = new Node(x, sentinel, sentinel.prev);
+        // second to last
+        sentinel.prev.prev.next = sentinel.prev;
 
     }
 
@@ -72,9 +72,10 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        Node<T> p = sentinel.next;
-        while (p.next != sentinel.next) {
+        Node p = sentinel.next;
+//        while (p.next != sentinel.next) {
             // 这里其实只是正向检测
+        while (p != sentinel) {
             returnList.add(p.item);
             p = p.next;
         }
@@ -108,7 +109,13 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T removeFirst() {
-        return null;
+        if (sentinel.next == sentinel) {
+            return null;
+        }
+        size -= 1;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
+        return sentinel.next.item;
     }
 
     /**
@@ -118,7 +125,13 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T removeLast() {
-        return null;
+        if (sentinel.prev == sentinel) {
+            return null;
+        }
+        size -= 1;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
+        return sentinel.prev.item;
     }
 
     /**
@@ -135,7 +148,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         if (index >= size() || size() == 0 || index < 0) {
             return null;
         }
-        Node<T> p = sentinel.next; // 第0个item
+        Node p = sentinel.next; // 第0个item
         int i = 0;
         while (i < index) {
             i++;
@@ -154,7 +167,14 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T getRecursive(int index) {
-        Node<T> p = sentinel.next; // 第0个item
-        if (p = p.next)
+        if (size() == 0 || index >= size() || index < 0) {
+            return null;
+        }
+        index -= 1;
+        Node p = sentinel.prev; // 第0个item
+        if (index == 0) {
+            return p.item;
+        }
+        return getRecursive(index);
     }
 }

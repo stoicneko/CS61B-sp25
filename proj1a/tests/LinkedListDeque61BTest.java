@@ -129,4 +129,63 @@ public class LinkedListDeque61BTest {
         assertThat(lld1.get(3)).isNull();
         assertThat(lld1.get(13134)).isNull();
     }
+
+    @Test
+    public void removeFirstTest() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+
+         /* I've decided to add in comments the state after each call for the convenience of the
+            person reading this test. Some programmers might consider this excessively verbose. */
+        lld1.addLast(0);   // [0]
+        lld1.addLast(1);   // [0, 1]
+        lld1.addFirst(-1); // [-1, 0, 1]
+        lld1.addLast(2);   // [-1, 0, 1, 2]
+        lld1.addFirst(-2); // [-2, -1, 0, 1, 2]
+
+        lld1.removeFirst();   // [-1, 0, 1, 2]
+        assertThat(lld1.toList()).containsExactly(-1, 0, 1, 2).inOrder();
+        lld1.removeFirst();   // [0, 1, 2]
+        assertThat(lld1.size()).isEqualTo(3);
+        lld1.removeFirst();   // [1, 2]
+        lld1.removeFirst();   // [2]
+        assertThat(lld1.toList()).containsExactly(2).inOrder();
+
+        assertThat(lld1.removeFirst()).isNull(); // []
+    }
+
+    @Test
+    public void removeLastTest() {
+        Deque61B<String> lld1 = new LinkedListDeque61B<>();
+
+        lld1.addLast("front"); // after this call we expect: ["front"]
+        lld1.addLast("middle"); // after this call we expect: ["front", "middle"]
+        lld1.addLast("back"); // after this call we expect: ["front", "middle", "back"]
+
+        lld1.removeLast(); // ["front", "middle"]
+        assertThat(lld1.toList()).containsExactly("front", "middle").inOrder();
+
+        lld1.removeLast(); // ["front"]
+        assertThat(lld1.toList()).containsExactly("front").inOrder();
+
+        assertThat(lld1.removeLast()).isNull(); // []
+    }
+
+    @Test
+    public void removeFirstAndRemoveLastTest() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        lld1.addLast(0);   // [0]
+        lld1.addLast(1);   // [0, 1]
+        lld1.addFirst(-1); // [-1, 0, 1]
+        lld1.addLast(2);   // [-1, 0, 1, 2]
+        lld1.addFirst(-2); // [-2, -1, 0, 1, 2]
+
+        lld1.removeLast();     // [-2, -1, 0, 1]
+        lld1.removeFirst();    // [-1, 0, 1]
+        lld1.removeLast();     // [-1, 0]
+        lld1.removeFirst();    // [0]
+        assertThat(lld1.toList()).containsExactly(0).inOrder();
+
+        lld1.removeFirst();    // []
+        assertThat(lld1.size()).isEqualTo(0);
+        }
 }
