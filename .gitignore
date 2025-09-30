@@ -72,3 +72,15 @@ synsets1000-subgraph.txt
 # Please don't unless you know what you're doing
 *.iml
 **/.idea/**
+
+# 忽略 proj2a/data 下的所有内容
+Projects/proj2a/data/*
+
+# 保留 .gitkeep
+!Projects/proj2a/data/.gitkeep
+
+# 忽略 proj2a/data 下的所有内容
+Projects/proj2b/data/*
+
+# 保留 .gitkeep
+!Projects/proj2b/data/.gitkeep
