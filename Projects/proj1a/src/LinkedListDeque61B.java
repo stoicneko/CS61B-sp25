@@ -145,7 +145,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T get(int index) {
-        if (index >= size() || size() == 0 || index < 0) {
+        if (index >= size() || index < 0) { // 已经包含size == 0的情况
             return null;
         }
         Node p = sentinel.next; // 第0个item
@@ -167,10 +167,17 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
      */
     @Override
     public T getRecursive(int index) {
-        return null;
+        if (index >= size() || index < 0) {
+            return null;
+        }
+        return getRecursiveHelper(sentinel.next, index);
     }
 
-    private T getRecursiveHelper() {
-        return null;
+    private T getRecursiveHelper(Node p, int idx) { // index/idx
+        if (idx == 0) {
+            return p.item;
+        }
+        // return getRecursiveHelper(p.next, idx--); // 这里得是 idx - 1 不改变当前层的值
+        return getRecursiveHelper(p.next, idx - 1);
     }
 }
