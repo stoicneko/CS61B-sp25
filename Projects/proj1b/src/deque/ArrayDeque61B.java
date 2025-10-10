@@ -1,113 +1,102 @@
 package deque;
 
+import java.lang.Math;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayDeque61B<T> implements Deque61B<T> {
     int size;
     T[] items;
+    int nextFirst;
+    int nextLast;
+
     public ArrayDeque61B() {
         items = (T[]) new Object[8];
-        T nextFirst;
-        T nextLast;
-
         size = 0;
+        nextLast = 1;
+        nextFirst = 0;
     }
 
+    private void resize(int capacity) {
 
-    /**
-     * Add {@code x} to the front of the deque. Assumes {@code x} is never null.
-     *
-     * @param x item to add
-     */
+    }
+
     @Override
     public void addFirst(T x) {
-
+        if (size == items.length) {
+            resize(size * 2);
+        }
+        items[Math.floorMod(nextFirst, items.length)] = x;
+        nextFirst -= 1;
+        size += 1;
     }
 
-    /**
-     * Add {@code x} to the back of the deque. Assumes {@code x} is never null.
-     *
-     * @param x item to add
-     */
     @Override
     public void addLast(T x) {
-
+        if (size == items.length) {
+            resize(size * 2);
+        }
+        items[Math.floorMod(nextLast, items.length)] = x;
+        nextLast += 1;
+        size += 1;
     }
 
-    /**
-     * Returns a List copy of the deque. Does not alter the deque.
-     *
-     * @return a new list copy of the deque.
-     */
     @Override
     public List<T> toList() {
-        return List.of();
+        List<T> returnList = new ArrayList<>();
+//        for (int i = nextFirst + 1; i < nextLast; i++) {
+//            returnList.add(items[Math.floorMod(i, items.length)]);
+//        }
+        for (int i = 0; i < size; i++) {
+            returnList.add(get(i));
+        }
+        return returnList;
     }
 
-    /**
-     * Returns if the deque is empty. Does not alter the deque.
-     *
-     * @return {@code true} if the deque has no elements, {@code false} otherwise.
-     */
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
-    /**
-     * Returns the size of the deque. Does not alter the deque.
-     *
-     * @return the number of items in the deque.
-     */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
-    /**
-     * Remove and return the element at the front of the deque, if it exists.
-     *
-     * @return removed element, otherwise {@code null}.
-     */
+
     @Override
     public T removeFirst() {
-        return null;
+        if (size == 0) {
+            return null;
+        }
+        size -= 1;
+        nextFirst += 1;
+        return get(nextFirst);
     }
 
-    /**
-     * Remove and return the element at the back of the deque, if it exists.
-     *
-     * @return removed element, otherwise {@code null}.
-     */
     @Override
     public T removeLast() {
-        return null;
+        if (size == 0) {
+            return null;
+        }
+        size -= 1;
+        nextLast -= 1;
+        return get(nextLast);
     }
 
-    /**
-     * The Deque61B abstract data type does not typically have a get method,
-     * but we've included this extra operation to provide you with some
-     * extra programming practice. Gets the element, iteratively. Returns
-     * null if index is out of bounds. Does not alter the deque.
-     *
-     * @param index index to get
-     * @return element at {@code index} in the deque
-     */
     @Override
     public T get(int index) {
-        return null;
+        if (index >= size || index < 0) {
+            return null;
+        }
+        int start = nextFirst + 1;
+        return items[Math.floorMod(start + index, items.length)];
     }
 
-    /**
-     * This method technically shouldn't be in the interface, but it's here
-     * to make testing nice. Gets an element, recursively. Returns null if
-     * index is out of bounds. Does not alter the deque.
-     *
-     * @param index index to get
-     * @return element at {@code index} in the deque
-     */
     @Override
     public T getRecursive(int index) {
-        return null;
+        // 认真阅读要求!!!!!!!!
+        // READ THE REQUIREMENTS CAREFULLY!!!
+        throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
     }
 }

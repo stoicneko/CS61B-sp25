@@ -28,11 +28,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         sentinel.prev = sentinel;
     }
 
-    /**
-     * Add {@code x} to the front of the deque. Assumes {@code x} is never null.
-     *
-     * @param x item to add
-     */
     @Override
     public void addFirst(T x) {
         size += 1;
@@ -49,11 +44,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     }
 
-    /**
-     * Add {@code x} to the back of the deque. Assumes {@code x} is never null.
-     *
-     * @param x item to add
-     */
     @Override
     public void addLast(T x) {
         size += 1;
@@ -64,11 +54,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     }
 
-    /**
-     * Returns a List copy of the deque. Does not alter the deque.
-     *
-     * @return a new list copy of the deque.
-     */
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
@@ -82,31 +67,16 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         return returnList;
     }
 
-    /**
-     * Returns if the deque is empty. Does not alter the deque.
-     *
-     * @return {@code true} if the deque has no elements, {@code false} otherwise.
-     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * Returns the size of the deque. Does not alter the deque.
-     *
-     * @return the number of items in the deque.
-     */
     @Override
     public int size() {
         return size;
     }
 
-    /**
-     * Remove and return the element at the front of the deque, if it exists.
-     *
-     * @return removed element, otherwise {@code null}.
-     */
     @Override
     public T removeFirst() {
         if (sentinel.next == sentinel) {
@@ -118,11 +88,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         return sentinel.next.item;
     }
 
-    /**
-     * Remove and return the element at the back of the deque, if it exists.
-     *
-     * @return removed element, otherwise {@code null}.
-     */
     @Override
     public T removeLast() {
         if (sentinel.prev == sentinel) {
@@ -134,15 +99,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         return sentinel.prev.item;
     }
 
-    /**
-     * The Deque61B abstract data type does not typically have a get method,
-     * but we've included this extra operation to provide you with some
-     * extra programming practice. Gets the element, iteratively. Returns
-     * null if index is out of bounds. Does not alter the deque.
-     *
-     * @param index index to get
-     * @return element at {@code index} in the deque
-     */
     @Override
     public T get(int index) {
         if (index >= size() || index < 0) { // 已经包含size == 0的情况
@@ -157,15 +113,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         return p.item;
     }
 
-    /**
-     * This method technically shouldn't be in the interface, but it's here
-     * to make testing nice. Gets an element, recursively. Returns null if
-     * index is out of bounds. Does not alter the deque.
-     *
-     * @param index index to get
-     * @return element at {@code index} in the deque
-     */
-    @Override
     public T getRecursive(int index) {
         if (index >= size() || index < 0) {
             return null;

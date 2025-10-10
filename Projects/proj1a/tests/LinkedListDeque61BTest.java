@@ -109,28 +109,28 @@ public class LinkedListDeque61BTest {
         Deque61B<String> lld1 = new LinkedListDeque61B<>();
 
         // empty Deque
-        assertThat(lld1.get(0)).isNull();
-        assertThat(lld1.get(1)).isNull();
-        assertThat(lld1.get(-1)).isNull();
+        assertThat(lld1.getRecursive(0)).isNull();
+        assertThat(lld1.getRecursive(1)).isNull();
+        assertThat(lld1.getRecursive(-1)).isNull();
 
         lld1.addFirst("back"); // after this call we expect: ["back"]
-        assertThat(lld1.get(0)).isEqualTo("back");
+        assertThat(lld1.getRecursive(0)).isEqualTo("back");
 
         lld1.addFirst("middle");
-        assertThat(lld1.get(0)).isEqualTo("middle");
-        assertThat(lld1.get(1)).isEqualTo("back");
+        assertThat(lld1.getRecursive(0)).isEqualTo("middle");
+        assertThat(lld1.getRecursive(1)).isEqualTo("back");
 
         lld1.addFirst("front");
-        assertThat(lld1.get(0)).isEqualTo("front");
-        assertThat(lld1.get(1)).isEqualTo("middle");
-        assertThat(lld1.get(2)).isEqualTo("back");
+        assertThat(lld1.getRecursive(0)).isEqualTo("front");
+        assertThat(lld1.getRecursive(1)).isEqualTo("middle");
+        assertThat(lld1.getRecursive(2)).isEqualTo("back");
 
         // i < -1
-        assertThat(lld1.get(-1)).isNull();
+        assertThat(lld1.getRecursive(-1)).isNull();
 
         // get out of bounds
-        assertThat(lld1.get(3)).isNull();
-        assertThat(lld1.get(13134)).isNull();
+        assertThat(lld1.getRecursive(3)).isNull();
+        assertThat(lld1.getRecursive(13134)).isNull();
     }
 
     @Test
