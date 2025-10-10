@@ -3,8 +3,14 @@ package deque;
 import java.util.List;
 
 public class ArrayDeque61B<T> implements Deque61B<T> {
+    int size;
+    T[] items;
     public ArrayDeque61B() {
+        items = (T[]) new Object[8];
+        T nextFirst;
+        T nextLast;
 
+        size = 0;
     }
 
 
