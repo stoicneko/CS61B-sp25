@@ -61,7 +61,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
         Node p = sentinel.next;
-//        while (p.next != sentinel.next) {
+        // while (p.next != sentinel.next) {
         // 这里其实只是正向检测
         while (p != sentinel) {
             returnList.add(p.item);
@@ -144,7 +144,8 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         }
 
         public boolean hasNext() {
-            if (wizPos.next != sentinel) {
+            // 这里到底怎么检测最后一个, 就看wizPos
+            if (wizPos != sentinel) {
                 return true;
             }
             return false;

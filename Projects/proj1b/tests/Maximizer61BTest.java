@@ -15,12 +15,12 @@ public class Maximizer61BTest {
         }
     }
 
-//    @Test
-//    public void basicTest() {
-//        ArrayDeque61B<String> ad = new ArrayDeque61B<>();
-//        ad.addFirst("");
-//        ad.addFirst("2");
-//        ad.addFirst("fury road");
-//        assertThat(Maximizer61B.max(ad, new StringLengthComparator())).isEqualTo("fury road");
-//    }
+    @Test
+    public void basicTest() {
+        ArrayDeque61B<String> ad = new ArrayDeque61B<>();
+        ad.addFirst("");
+        ad.addFirst("2");
+        ad.addFirst("fury road");
+        assertThat(Maximizer61B.max(ad, new StringLengthComparator())).isEqualTo("fury road");
+    }
 }

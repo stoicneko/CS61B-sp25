@@ -129,7 +129,8 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         private int wizPos;
 
         public ArrayDequeIterator() {
-            wizPos = nextFirst - 1;
+            /* 就一个符号!!!! 加号写成减号导致出现一连串的错误, 然后又排查错误 */
+            wizPos = nextFirst + 1;
         }
 
         public boolean hasNext() {
