@@ -38,17 +38,31 @@ public class Maximizer61B {
      * @return          the maximum element according to the comparator
      */
     public static <T> T max(Iterable<T> iterable, Comparator<T> comp) {
+        if (iterable == null) {
+            return null;
+        }
+        Iterator<T> iterator = iterable.iterator();
+        if (iterator.hasNext()) {
+            T maxItem = iterator.next();
+            for (T x : iterable) {
+                int cmp = comp.compare(x, maxItem);
+                if (cmp > 0) {
+                    maxItem = x;
+                }
+            }
+            return maxItem;
+        }
         return null;
     }
 
     public static void main(String[] args) {
         // The style checker will complain about this main method, feel free to delete.
 
-         LinkedListDeque61B<Integer> ad = new LinkedListDeque61B<>();
-         ad.addLast(5);
-         ad.addLast(12);
-         ad.addLast(17);
-         ad.addLast(23);
+         ArrayDeque61B<Integer> ad = new ArrayDeque61B<>();
+         ad.addFirst(5);
+         ad.addFirst(12);
+         ad.addFirst(17);
+         ad.addFirst(23);
          System.out.println(max(ad));
     }
 }

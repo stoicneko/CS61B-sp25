@@ -29,7 +29,7 @@
 - [x] Proj 0 - 2048 - [Solution](proj/proj0/) - [Website](https://sp25.datastructur.es/projects/proj0/)
 - Proj 1
   - [x] A - LinkedListDeque61B - [Solution](proj/proj1a/) - [Website](https://sp25.datastructur.es/projects/proj1a/)
-  - [ ] B - ArrayDeque61B - [Solution](proj/proj1b/) - [Website](https://sp25.datastructur.es/projects/proj1b/)
+  - [x] B - ArrayDeque61B - [Solution](proj/proj1b/) - [Website](https://sp25.datastructur.es/projects/proj1b/)
 - Proj 2
   - [ ] A - Ngordnet (NGrams) - [Solution](proj/proj2a/) - [Website](https://sp25.datastructur.es/projects/proj2a/)
   - [ ] B - Ngordnet (Wordnet) - [Solution](proj/proj2b/) - [Website](https://sp25.datastructur.es/projects/proj2b/)

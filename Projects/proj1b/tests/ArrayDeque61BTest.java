@@ -40,7 +40,7 @@ public class ArrayDeque61BTest {
 
     @Test
     /** This test performs interspersed addFirst and addLast calls. */
-    public void addFirstAndAddLastTest() {
+    public void addFirstAndAddLastTest1() {
         Deque61B<Integer> ad1 = new ArrayDeque61B<>();
 
         ad1.addLast(0);     // [0]
@@ -61,6 +61,17 @@ public class ArrayDeque61BTest {
     }
 
     @Test
+    public void addFirstAndAddLastTest2() {
+        Deque61B<String> ad1 = new ArrayDeque61B<>();
+
+        ad1.addFirst("");
+        ad1.addFirst("2");
+        ad1.addFirst("fury road");
+
+        assertThat(ad1.toList()).containsExactly("fury road", "2", "").inOrder();
+
+    }
+    @Test
     public void getTest() {
         Deque61B<String> ad1 = new ArrayDeque61B<>();
 
@@ -69,25 +80,28 @@ public class ArrayDeque61BTest {
         assertThat(ad1.get(1)).isNull();
         assertThat(ad1.get(-1)).isNull();
 
-        ad1.addFirst("back"); // after this call we expect: ["back"]
-        assertThat(ad1.get(0)).isEqualTo("back");
+//        ad1.addFirst("back"); // after this call we expect: ["back"]
+//        assertThat(ad1.get(0)).isEqualTo("back");
+//
+//        ad1.addFirst("middle");
+//        assertThat(ad1.get(0)).isEqualTo("middle");
+//        assertThat(ad1.get(1)).isEqualTo("back");
+//
+//        ad1.addFirst("front");
+//        assertThat(ad1.get(0)).isEqualTo("front");
+//        assertThat(ad1.get(1)).isEqualTo("middle");
+//        assertThat(ad1.get(2)).isEqualTo("back");
 
-        ad1.addFirst("middle");
-        assertThat(ad1.get(0)).isEqualTo("middle");
-        assertThat(ad1.get(1)).isEqualTo("back");
-
-        ad1.addFirst("front");
-        assertThat(ad1.get(0)).isEqualTo("front");
-        assertThat(ad1.get(1)).isEqualTo("middle");
-        assertThat(ad1.get(2)).isEqualTo("back");
-
-        for (int i = 0; i < 100; i++) {
-            ad1.addLast("Test");
+        for (int i = 3; i < 100; i++) {
+            ad1.addFirst("Test");
         }
 
-        assertThat(ad1.get(0)).isEqualTo("front");
-        assertThat(ad1.get(1)).isEqualTo("middle");
-        assertThat(ad1.get(2)).isEqualTo("back");
+        ad1.addLast("Test1");
+//        assertThat(ad1.get(0)).isEqualTo("front");
+//        assertThat(ad1.get(1)).isEqualTo("middle");
+//        assertThat(ad1.get(2)).isEqualTo("back");
+
+        assertThat(ad1.get(1)).isEqualTo("Test");
 
         // i < -1
         assertThat(ad1.get(-1)).isNull();

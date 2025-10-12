@@ -130,17 +130,22 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
         public ArrayDequeIterator() {
             /* 就一个符号!!!! 加号写成减号导致出现一连串的错误, 然后又排查错误 */
-            wizPos = nextFirst + 1;
+            wizPos = 0;
         }
 
         public boolean hasNext() {
-            if (wizPos < nextLast) {
+            if (wizPos < size) {
                 return true;
             }
             return false;
         }
 
         public T next() {
+            /* 就是这里, 还是要从0, 表面上的第一个开始遍历
+            /* get(wizPos)是第一个吗, 自己的get()没有实现负数
+            /* 所以原本令wizPos = nextFirst + 1 如果就不对
+            /* 那应该实现负数吗? 不应该, 因为get()获取的永远是conceptual order
+            /* 表面上数组的顺序, 所以我们这里需要修改的是wizPos */
             T returnItem = get(wizPos);
             wizPos += 1;
             return returnItem;
