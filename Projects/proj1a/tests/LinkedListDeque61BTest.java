@@ -137,8 +137,9 @@ public class LinkedListDeque61BTest {
     public void removeFirstTest() {
         Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
 
-         /* I've decided to add in comments the state after each call for the convenience of the
-            person reading this test. Some programmers might consider this excessively verbose. */
+        // 只测试了deque的顺序和大小
+        // 没有测试removeFirst和removeLast的返回值, 应该返回被移除的first
+        // 理解错英语含义了
         lld1.addLast(0);   // [0]
         lld1.addLast(1);   // [0, 1]
         lld1.addFirst(-1); // [-1, 0, 1]
