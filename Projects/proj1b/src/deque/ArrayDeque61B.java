@@ -73,12 +73,14 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (isEmpty()) {
             return null;
         }
-        T itemToReturn = get(nextFirst + 1);
+        // 记住 get获取的永远是conceptual的值 永远是表数组的值
+        T itemToReturn = get(0);
         size -= 1;
-        if ((double) size / items.length < 0.25) {
+        nextFirst += 1;
+        // 对于长度为 16 或更长的数组，你的使用率应该始终至少为 25%
+        // 对于长度为 15 或更短的数组，你的使用率可以任意低。
+        if (items.length >= 16 && (double) size / items.length < 0.25) {
             resize(items.length / 2);
-        } else {
-            nextFirst += 1;
         }
         return itemToReturn;
     }
@@ -88,12 +90,16 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (isEmpty()) {
             return null;
         }
-        T itemToReturn = get(nextLast + 1);
+        T itemToReturn = get(size);
         size -= 1;
-        if ((double) size / items.length < 0.25) {
+        nextLast -= 1;
+        // resize 会重置指针(nextLast)
+        // nextLast 不要放在下面这个if语句里面
+        // 一个好的设计应该将核心逻辑（移动指针）和辅助逻辑（检查是否需要缩容）分开。
+        // 代码的意图应该是“移除一个元素，然后检查是否需要缩容”
+        // 而不是“检查是否需要缩容，如果不需要，就移除一个元素”。
+        if (items.length >= 16 && (double) size / items.length < 0.25) {
             resize(items.length / 2);
-        } else {
-            nextLast -= 1;
         }
         return itemToReturn;
     }
@@ -162,7 +168,8 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
                 return false;
             }
             for (int i = 0; i < this.size(); i++) {
-                if (this.get(i) != otherDeque.get(i)) {
+                // if (this.get(i) != otherDeque.get(i)) {
+                if (!this.get(i).equals(otherDeque.get(i))) {
                     return false;
                 }
             }
