@@ -6,7 +6,7 @@ import java.util.Collection;
  *  A hash table-backed Map implementation.
  *
  *  Assumes null keys will never be inserted, and does not resize down upon remove().
- *  @author YOUR NAME HERE
+ *  @author stoicneko
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
