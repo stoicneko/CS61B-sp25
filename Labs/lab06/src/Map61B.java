@@ -25,13 +25,13 @@ public interface Map61B<K, V> extends Iterable<K> {
     /** Removes every mapping from this map. */
     void clear();
 
-    /** Returns a Set view of the keys contained in this map. Not required for Lab 7.
+    /** Returns a Set view of the keys contained in this map. Not required for Lab 6.
      * If you don't implement this, throw an UnsupportedOperationException. */
     Set<K> keySet();
 
     /** Removes the mapping for the specified key from this map if present,
      * or null if there is no such mapping.
-     * Not required for Lab 7. If you don't implement this, throw an
+     * Not required for Lab 6. If you don't implement this, throw an
      * UnsupportedOperationException. */
     V remove(K key);
 }

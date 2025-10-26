@@ -10,23 +10,25 @@
 - [x] Lab 2 - Debugging (Part 1) - [Solution](lab/lab02) - [Website](https://sp25.datastructur.es/labs/lab02/)
 - [x] Lab 3 - Debugging (Part 2) - [Solution](lab/lab03/) - [Website](https://sp25.datastructur.es/labs/lab03/)
 - [x] Lab 4 - Git - [Solution](lab04/) - [Website](https://sp25.datastructur.es/labs/lab04/)
-- [ ] Lab 5 - Disjoint Sets - [Solution](lab05/) - [Website](https://sp25.datastructur.es/labs/lab05/)
-- [ ] Lab 6 - BSTMap - [Solution](lab06/) - [Website](https://sp25.datastructur.es/labs/lab06/)
-- [ ] Lab 7 - LLRBs - [Solution](lab07/) - [Website](https://sp25.datastructur.es/labs/lab07/)
-- [ ] Lab 8 - Hashmaps - [Solution](lab08/) - [Website](https://sp25.datastructur.es/labs/lab08/)
-- [ ] Lab 9 - Conway's Game of Life - [Solution](lab09/) - [Website](https://sp25.datastructur.es/labs/lab09/)
+- [ ] Lab 5 - Project 1 Review - [Solution](lab05/) - [Website](https://sp25.datastructur.es/labs/lab05/)
+- [X] Lab 6 - BSTMap - [Solution](lab06/) - [Website](https://sp25.datastructur.es/labs/lab06/)
+- [ ] Lab 7 - Hashmaps - [Solution](lab07/) - [Website](https://sp25.datastructur.es/labs/lab07/)
+- [ ] Lab 8 - LLRBs - [Solution](lab08/) - [Website](https://sp25.datastructur.es/labs/lab08/)
+- [ ] Lab 9 - Introdution to Project 3 - [Solution](lab09/) - [Website](https://sp25.datastructur.es/labs/lab09/)
 - [ ] Lab 10 - Tetris - [Solution](lab10/) - [Website](https://sp25.datastructur.es/labs/lab10/)
-
+- [ ] Lab 11 - Comparison-Based Sorts
+- [ ] Lab X - Disjoint Sets
 ### HomeWork
 
 - HW 0 - Java, Python, Introduction
   - [x] HW 0a - [Solution](hw0a) - [Website](https://sp25.datastructur.es/homeworks/hw0/hw0a/)
   - [x] HW 0b - [Solution](hw0b) - [Website](https://sp25.datastructur.es/homeworks/hw0/hw0b/)
-- [ ] HW 2 - Percolation - [Solution](hw2) - [Website](https://sp25.datastructur.es/homeworks/hw2/)
+- [x] HW 2 - Percolation - [Solution](hw2) - [Website](https://sp25.datastructur.es/homeworks/hw2/)
 
 ### Project
 
 - [x] Proj 0 - 2048 - [Solution](proj/proj0/) - [Website](https://sp25.datastructur.es/projects/proj0/)
+  -[ ] HardMode
 - Proj 1
   - [x] A - LinkedListDeque61B - [Solution](proj/proj1a/) - [Website](https://sp25.datastructur.es/projects/proj1a/)
     - [ ] Tests
