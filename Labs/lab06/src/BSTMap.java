@@ -1,5 +1,7 @@
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author stoicneko
@@ -108,12 +110,30 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     }
 
     /**
-     * Returns a Set view of the keys contained in this map. Not required for Lab 7.
+     * Returns a Set view of the keys contained in this map. Not required for Lab 6.
      * If you don't implement this, throw an UnsupportedOperationException.
      */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        return collectKeys(root);
+    }
+
+    // 注意使用treeSet而不是hashSet
+    private Set<K> collectKeys(Node n) {
+        if (n == null) {
+            // 这里应该返回一个新的HashSet, 而不是null
+            return new TreeSet<>();
+        }
+        Set<K> returnSet = new TreeSet<>();
+        // 直接这样是不行的, 没有处理返回值
+        // keySet(n.left);
+        // keySet(n.right);
+
+        // 要把最后的结果合并
+        returnSet.add(n.key);
+        returnSet.addAll(collectKeys(n.left)); // 合并左子树
+        returnSet.addAll(collectKeys(n.right)); // 合并右子树
+        return returnSet;
     }
 
     /**
@@ -136,6 +156,26 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        return new BSTMapIterator();
+    }
+
+    public class BSTMapIterator implements Iterator<K> {
+        private Node wizPos;
+
+        public BSTMapIterator() {
+            wizPos = root;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return wizPos != null;
+        }
+
+        @Override
+        public K next() {
+            K returnItem =wizPos.key;
+            wizPos = wizPos.left;
+            return returnItem;
+        }
     }
 }
