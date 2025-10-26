@@ -10,7 +10,8 @@ public class Percolation {
     // 不要害怕创建实例变量
     // 如何判断某个坐标打开与否?
     // 创建一个布尔变量啊
-    WeightedQuickUnionUF uf; // 实例化
+    WeightedQuickUnionUF uf1; // 实例化
+    WeightedQuickUnionUF uf2; // 实例化
     boolean[][] open;
     int N;
     int top;
@@ -41,16 +42,20 @@ public class Percolation {
     private void checkNeighbors(int row, int col) {
         // 注意边界测试
         if (col < N - 1 && isOpen(row, col + 1)) {
-            uf.union(idx(row, col), idx(row, col + 1));
+            uf1.union(idx(row, col), idx(row, col + 1));
+            uf2.union(idx(row, col), idx(row, col + 1));
         }
         if (row < N - 1 && isOpen(row + 1, col)) {
-            uf.union(idx(row, col), idx(row + 1, col));
+            uf1.union(idx(row, col), idx(row + 1, col));
+            uf2.union(idx(row, col), idx(row + 1, col));
         }
         if (col > 0 && isOpen(row, col - 1)) {
-            uf.union(idx(row, col), idx(row, col - 1));
+            uf1.union(idx(row, col), idx(row, col - 1));
+            uf2.union(idx(row, col), idx(row, col - 1));
         }
         if (row > 0 && isOpen(row - 1, col)) {
-            uf.union(idx(row, col), idx(row - 1, col));
+            uf1.union(idx(row, col), idx(row - 1, col));
+            uf2.union(idx(row, col), idx(row - 1, col));
         }
     }
 
@@ -58,8 +63,11 @@ public class Percolation {
         if (row < 0 || row >= N || col < 0 || col >= N) {
             throw new IndexOutOfBoundsException();
         }
-        if (row == 0) uf.union(idx(row, col), top);
-        if (row == N - 1) uf.union(idx(row, col), bottom);
+        if (row == 0) {
+            uf1.union(idx(row, col), top);
+            uf2.union(idx(row, col), top);
+        }
+        if (row == N - 1) uf1.union(idx(row, col), bottom);
         if (!isOpen(row, col)) { // 不要重复计数
             open[row][col] = true;
             openSites += 1;
@@ -81,12 +89,9 @@ public class Percolation {
         }
         if (!isOpen(row, col)) {
             return false;
-        } else {
-            if (uf.connected(idx(row, col), top)) {
-                return true;
-            }
         }
-        return false;
+        // 如果用uf1这里会误判, backwash
+        return uf2.connected(idx(row, col), top);
     }
 
     public int numberOfOpenSites() {
@@ -94,8 +99,6 @@ public class Percolation {
     }
 
     public boolean percolates() {
-        // TODO: Fill in this method.
-        if (uf.connected(bottom, top)) return true;
-        return false;
+        return uf1.connected(bottom, top);
     }
 }
