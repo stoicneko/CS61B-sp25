@@ -1,8 +1,6 @@
 package hashmap;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author stoicneko
@@ -33,6 +31,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private int size = 0;
     private double loadFactor;
     private int initialCapacity;
+    private int threshold;
+    private int index;
+    private int capacity;
 
     // 为什么需要三个构造函数?
     // 三个状态, 三种不同输入
@@ -60,6 +61,15 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         if (initialCapacity <= 0 || loadFactor <= 0) {
             throw new IllegalArgumentException();
         }
+        // 检测错误都放在最前面
+        // 验证逻辑优先；
+        // 对象状态只在合法情况下改变。
+        this.loadFactor = loadFactor;
+        this.initialCapacity = initialCapacity;
+
+        // threshold(临界点) 可能为零
+        threshold = Math.max(1, (int) (loadFactor * initialCapacity));
+
         buckets = new Collection[initialCapacity];
 
     }
@@ -85,37 +95,101 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * OWN BUCKET DATA STRUCTURES WITH THE NEW OPERATOR!
      */
     protected Collection<Node> createBucket() {
-        // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>();
     }
 
-    // TODO: Implement the methods of the Map61B Interface below
     // Your code won't compile until you do so!
 
     @Override
     public void put(K key, V value) {
-
+        // 模哪个值? 模buckets的length
+        index = Math.floorMod(key.hashCode(), buckets.length);
+        if (buckets[index] == null) {
+            buckets[index] = createBucket();
+        }
+        for (Node node : buckets[index]) {
+            // 表中存在相同键, 仅更新值, size不变
+            // 注意使用equals
+            if (Objects.equals(key, node.key)) {
+                node.value = value;
+                return;
+            }
+        }
+        buckets[index].add(new Node(key, value));
         size += 1;
+        // 放最后判断, 和放最开始判断有什么区别?
+        // 避免不必要扩容
+        // 同时这里使用 > 而不是>= 也是同样的原因
+        if (size > threshold) {
+            resize();
+        }
     }
+
+    private void resize() {
+        // 新的桶也需要判断null, 重新分配
+        int newCapacity = 2 * buckets.length;
+        Collection<Node>[] newBuckets = new Collection[newCapacity];
+        for (int i = 0; i < buckets.length; i++) {
+            // 不遍历空桶
+            if (buckets[i] == null) {
+                continue;
+            }
+            for (Node node : buckets[i]) {
+                int idx = Math.floorMod(node.key.hashCode(), newCapacity);
+                if (newBuckets[idx] == null) {
+                    newBuckets[idx] = createBucket();
+                }
+                newBuckets[idx].add(node);
+            }
+        }
+        // 最后让buckets指向新桶, 更新指针
+        buckets = newBuckets;
+        threshold = (int) (newCapacity * loadFactor);
+    }
+
 
     @Override
     public V get(K key) {
+        int idx = Math.floorMod(key.hashCode(), buckets.length);
+        if (buckets[idx] == null) {
+            return null;
+        }
+        for (Node node : buckets[idx]) {
+            // 笨比了, 一定要用equals
+            if (Objects.equals(node.key, key)) {
+                return node.value;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean containsKey(K key) {
+        if (key == null)
+            throw new IllegalArgumentException("null key not supported");
+        int idx = Math.floorMod(key.hashCode(), buckets.length);
+        if (buckets[idx] == null) {
+            return false;
+        }
+        for (Node node : buckets[idx]) {
+            if (Objects.equals(node.key, key)) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void clear() {
-
+        size = 0;
+        buckets = new Collection[initialCapacity];
+        // 记得更新临界点, 这个总容易忘
+        threshold = (int) (initialCapacity * loadFactor);
     }
 
     @Override
