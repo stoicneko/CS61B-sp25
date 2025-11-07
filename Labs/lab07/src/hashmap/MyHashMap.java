@@ -24,16 +24,27 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
             key = k;
             value = v;
         }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode();
+        }
     }
 
     /* Instance Variables */
     private Collection<Node>[] buckets;
-    private int size = 0;
-    private double loadFactor;
-    private int initialCapacity;
-    private int threshold;
-    private int index;
-    private int capacity;
+    // You should probably define some more!
+    protected int size;
+    protected final double loadFactor;
+    protected int threshold;
+    protected int capacity;
+
+    // 封装, don't use magic number
+    static final int MAXIMUM_CAPACITY = 1 << 30;
+    static final int DEFAULT_INITIAL_CAPACITY = 16;
+    static final double DEFAULT_LOAD_FACTOR = 0.75;
+
+
 
     // 为什么需要三个构造函数?
     // 三个状态, 三种不同输入
@@ -41,11 +52,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     /** Constructors */
     // 最固定的, 默认的
     public MyHashMap() {
-        this(16, 0.75);
+        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
 
     public MyHashMap(int initialCapacity) {
-        this(initialCapacity,0.75);
+        this(initialCapacity,DEFAULT_LOAD_FACTOR);
 
     }
 
@@ -58,17 +69,20 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * @param loadFactor maximum load factor
      */
     public MyHashMap(int initialCapacity, double loadFactor) {
-        if (initialCapacity <= 0 || loadFactor <= 0) {
+        if (initialCapacity <= 0 || loadFactor <= 0 || initialCapacity > MAXIMUM_CAPACITY) {
             throw new IllegalArgumentException();
         }
         // 检测错误都放在最前面
         // 验证逻辑优先；
         // 对象状态只在合法情况下改变。
         this.loadFactor = loadFactor;
-        this.initialCapacity = initialCapacity;
+        // initialCapacity 只在构造函数中使用, 不需要在构造函数外声明
+        // initialCapacity 仅在构造阶段用于初始化桶数组，不属于对象的持久状态，因此无需在类中保存。
+        // this.initialCapacity = initialCapacity;
 
         // threshold(临界点) 可能为零
         threshold = Math.max(1, (int) (loadFactor * initialCapacity));
+        // threshold = (int) (loadFactor * initialCapacity);
 
         buckets = new Collection[initialCapacity];
 
@@ -103,7 +117,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     @Override
     public void put(K key, V value) {
         // 模哪个值? 模buckets的length
-        index = Math.floorMod(key.hashCode(), buckets.length);
+        int index = Math.floorMod(key.hashCode(), buckets.length);
         if (buckets[index] == null) {
             buckets[index] = createBucket();
         }
@@ -139,7 +153,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
                 if (newBuckets[idx] == null) {
                     newBuckets[idx] = createBucket();
                 }
-                newBuckets[idx].add(node);
+                // 创建一个新的node, 而不是直接add(node)
+                newBuckets[idx].add(new Node(node.key, node.value));
             }
         }
         // 最后让buckets指向新桶, 更新指针
@@ -187,9 +202,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     @Override
     public void clear() {
         size = 0;
-        buckets = new Collection[initialCapacity];
+        buckets = new Collection[buckets.length];
         // 记得更新临界点, 这个总容易忘
-        threshold = (int) (initialCapacity * loadFactor);
+        threshold = (int) (buckets.length * loadFactor);
     }
 
     @Override
