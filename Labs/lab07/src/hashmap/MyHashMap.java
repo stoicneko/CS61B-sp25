@@ -56,7 +56,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     }
 
     public MyHashMap(int initialCapacity) {
-        this(initialCapacity,DEFAULT_LOAD_FACTOR);
+        this(initialCapacity, DEFAULT_LOAD_FACTOR);
 
     }
 
@@ -180,8 +180,10 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public boolean containsKey(K key) {
-        if (key == null)
+        // 其实不需要, assumes null keys will never be inserted.
+        if (key == null) {
             throw new IllegalArgumentException("null key not supported");
+        }
         int idx = Math.floorMod(key.hashCode(), buckets.length);
         if (buckets[idx] == null) {
             return false;
