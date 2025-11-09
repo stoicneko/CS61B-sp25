@@ -57,11 +57,10 @@ public class RedBlackTree<T extends Comparable<T>> {
      * @param node
      */
     void flipColors(RBTreeNode<T> node) {
-        if (isRed(node.left) && isRed(node.right)) {
-            node.isBlack = false;
-            node.left.isBlack = true;
-            node.right.isBlack = true;
-        }
+        node.isBlack = !node.isBlack;
+        node.left.isBlack = !node.right.isBlack;
+        node.right.isBlack = !node.right.isBlack;
+
     }
 
     /**
