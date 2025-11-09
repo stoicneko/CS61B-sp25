@@ -12,8 +12,8 @@ import static ngrams.TimeSeries.MIN_YEAR;
  * An NGramMap stores pertinent data from a "words file" and a "counts
  * file". It is not a map in the strict sense, but it does provide additional
  * functionality.
- *
- * @author Josh Hug
+ * @author stoicneko
+ * @since 2025.11.9
  */
 public class NGramMap {
 
