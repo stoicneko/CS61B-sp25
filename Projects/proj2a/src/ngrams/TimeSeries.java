@@ -41,9 +41,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      *  Returns all years for this time series in ascending order/升序.
      */
     public List<Integer> years() {
-        List<Integer> returnList = new ArrayList<>(this.keySet());
-        Collections.sort(returnList);
-        return returnList;
+        return new ArrayList<>(this.keySet());
     }
 
     /**
@@ -52,7 +50,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Double> data() {
         List<Double> returnList = new ArrayList<>();
-        for (int i : this.years()) {
+        for (Integer i : this.years()) {
             returnList.add(this.get(i));
         }
         return returnList;
@@ -68,8 +66,9 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * should store the value from the TimeSeries that contains that year.
      */
     public TimeSeries plus(TimeSeries ts) {
-        if (this.years() == null && ts.years()  == null) {
-            return null;
+        // 不会返回null, 只会返回空List
+        if (this.isEmpty() && ts.isEmpty()) {
+            return new TimeSeries();
         }
         TimeSeries returnTs = new TimeSeries();
 
@@ -104,7 +103,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
         TimeSeries returnTs = new TimeSeries();
         for (Integer year : this.years()) {
             if (!ts.containsKey(year)) {
-                throw new IllegalArgumentException("Wrong TimeSeries");
+                throw new IllegalArgumentException("Cannot divide: year " + year + " not found in divisor TimeSeries");
             }
             returnTs.put(year, this.get(year) / ts.get(year));
         }
